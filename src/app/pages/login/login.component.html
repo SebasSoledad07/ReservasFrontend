@@ -1,0 +1,69 @@
+<div class="auth-page">
+    <div class="auth-card">
+        <div class="auth-logo">
+            <div class="logo-icon">🏨</div>
+            <h1 class="auth-title">ReservasPro</h1>
+            <p class="auth-subtitle">Iniciá sesión con tu empresa</p>
+        </div>
+
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate class="auth-form">
+
+            <!-- Usuario -->
+            <div class="field-group" [class.has-error]="usernameControl.invalid && usernameControl.touched">
+                <label for="login-username" class="field-label">Usuario</label>
+                <div class="input-wrapper">
+                    <span class="input-icon">👤</span>
+                    <input id="login-username" type="text" formControlName="username" class="field-input"
+                        placeholder="Tu nombre de usuario" autocomplete="username" />
+                </div>
+                @if (usernameControl.touched && usernameControl.hasError('required')) {
+                <span class="field-error">El usuario es requerido.</span>
+                }
+                @if (usernameControl.touched && usernameControl.hasError('minlength')) {
+                <span class="field-error">Mínimo 3 caracteres.</span>
+                }
+            </div>
+
+            <!-- Contraseña -->
+            <div class="field-group" [class.has-error]="passwordControl.invalid && passwordControl.touched">
+                <label for="login-password" class="field-label">Contraseña</label>
+                <div class="input-wrapper">
+                    <span class="input-icon">🔒</span>
+                    <input id="login-password" [type]="showPassword() ? 'text' : 'password'" formControlName="password"
+                        class="field-input" placeholder="Mínimo 6 caracteres" autocomplete="current-password" />
+                    <button type="button" class="toggle-btn" (click)="togglePassword()">
+                        {{ showPassword() ? '🙈' : '👁️' }}
+                    </button>
+                </div>
+                @if (passwordControl.touched && passwordControl.hasError('required')) {
+                <span class="field-error">La contraseña es requerida.</span>
+                }
+                @if (passwordControl.touched && passwordControl.hasError('minlength')) {
+                <span class="field-error">Mínimo 6 caracteres.</span>
+                }
+            </div>
+
+            <!-- Error general -->
+            @if (errorMessage()) {
+            <div class="alert-error">
+                <span>⚠️</span> {{ errorMessage() }}
+            </div>
+            }
+
+            <!-- Submit -->
+            <button type="submit" class="btn-primary" [disabled]="isLoading()">
+                @if (isLoading()) {
+                <span class="spinner"></span> Ingresando...
+                } @else {
+                Iniciar sesión
+                }
+            </button>
+
+            <div class="auth-footer">
+                ¿Tu empresa no está registrada?
+                <a routerLink="/register" class="auth-link">Registrate aquí</a>
+            </div>
+
+        </form>
+    </div>
+</div>

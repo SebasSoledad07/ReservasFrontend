@@ -1,0 +1,108 @@
+<!-- =================== FORMULARIO (siempre visible) =================== -->
+@if (!isSubmitted()) {
+<div class="booking-page">
+    <div class="booking-card">
+
+        <div class="booking-header">
+            <div class="company-badge">🏨</div>
+            <p class="booking-company-tag">Reservar turno en</p>
+            <h1 class="booking-title">{{ companyDisplayName() }}</h1>
+            <p class="booking-subtitle">Completá el formulario para reservar tu turno</p>
+        </div>
+
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate class="booking-form">
+
+            <!-- Nombre del cliente -->
+            <div class="field-group" [class.has-error]="clientNameControl.invalid && clientNameControl.touched">
+                <label for="pub-client" class="field-label">Tu nombre completo</label>
+                <div class="input-wrapper">
+                    <span class="input-icon">👤</span>
+                    <input id="pub-client" type="text" formControlName="clientName" class="field-input"
+                        placeholder="Juan Pérez" autocomplete="name" />
+                </div>
+                @if (clientNameControl.touched && clientNameControl.hasError('required')) {
+                <span class="field-error">Tu nombre es requerido.</span>
+                }
+                @if (clientNameControl.touched && clientNameControl.hasError('minlength')) {
+                <span class="field-error">Mínimo 2 caracteres.</span>
+                }
+            </div>
+
+            <!-- Fecha y Hora -->
+            <div class="field-row">
+
+                <div class="field-group" [class.has-error]="dateControl.invalid && dateControl.touched">
+                    <label for="pub-date" class="field-label">Fecha</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">📅</span>
+                        <input id="pub-date" type="date" formControlName="date" class="field-input" [min]="today" />
+                    </div>
+                    @if (dateControl.touched && dateControl.hasError('required')) {
+                    <span class="field-error">La fecha es requerida.</span>
+                    }
+                </div>
+
+                <div class="field-group" [class.has-error]="timeControl.invalid && timeControl.touched">
+                    <label for="pub-time" class="field-label">Hora</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">🕐</span>
+                        <input id="pub-time" type="time" formControlName="time" class="field-input" />
+                    </div>
+                    @if (timeControl.touched && timeControl.hasError('required')) {
+                    <span class="field-error">La hora es requerida.</span>
+                    }
+                </div>
+
+            </div>
+
+            <!-- Servicio -->
+            <div class="field-group" [class.has-error]="serviceControl.invalid && serviceControl.touched">
+                <label for="pub-service" class="field-label">Servicio</label>
+                <div class="input-wrapper">
+                    <span class="input-icon">✂️</span>
+                    <select id="pub-service" formControlName="serviceName" class="field-input">
+                        <option value="" disabled>Seleccioná un servicio</option>
+                        @for (s of servicios; track s) {
+                        <option [value]="s">{{ s }}</option>
+                        }
+                    </select>
+                </div>
+                @if (serviceControl.touched && serviceControl.hasError('required')) {
+                <span class="field-error">El servicio es requerido.</span>
+                }
+            </div>
+
+            <!-- Error general -->
+            @if (errorMessage()) {
+            <div class="alert-error">
+                <span>⚠️</span> {{ errorMessage() }}
+            </div>
+            }
+
+            <!-- Submit -->
+            <button type="submit" class="btn-primary" [disabled]="isLoading()">
+                @if (isLoading()) {
+                <span class="spinner"></span> Reservando...
+                } @else {
+                Reservar turno
+                }
+            </button>
+
+        </form>
+    </div>
+</div>
+}
+
+<!-- =================== ESTADO: Reserva confirmada =================== -->
+@if (isSubmitted()) {
+<div class="booking-page">
+    <div class="booking-card success-card">
+        <div class="success-icon">🎉</div>
+        <h1 class="success-title">¡Reserva confirmada!</h1>
+        <p class="success-desc">Tu turno fue registrado exitosamente. ¡Te esperamos!</p>
+        <button type="button" class="btn-secondary" (click)="resetForm()">
+            Hacer otra reserva
+        </button>
+    </div>
+</div>
+}

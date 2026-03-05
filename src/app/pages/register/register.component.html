@@ -1,0 +1,130 @@
+<div class="auth-page">
+    <div class="auth-card">
+        <div class="auth-logo">
+            <div class="logo-icon">🏨</div>
+            <h1 class="auth-title">ReservasPro</h1>
+            <p class="auth-subtitle">Registra tu empresa</p>
+        </div>
+
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate class="auth-form">
+
+            <!-- Nombre de empresa -->
+            <div class="field-group" [class.has-error]="companyNameControl.invalid && companyNameControl.touched">
+                <label for="reg-company" class="field-label">Nombre de la empresa</label>
+                <div class="input-wrapper">
+                    <span class="input-icon">🏢</span>
+                    <input id="reg-company" type="text" formControlName="companyName" class="field-input"
+                        placeholder="Mi Empresa S.A." autocomplete="organization" />
+                </div>
+                @if (companyNameControl.touched && companyNameControl.hasError('required')) {
+                <span class="field-error">El nombre de la empresa es requerido.</span>
+                }
+                @if (companyNameControl.touched && companyNameControl.hasError('minlength')) {
+                <span class="field-error">Mínimo 2 caracteres.</span>
+                }
+            </div>
+
+            <!-- Usuario (admin) -->
+            <div class="field-group" [class.has-error]="usernameControl.invalid && usernameControl.touched">
+                <label for="reg-username" class="field-label">Nombre de usuario (admin)</label>
+                <div class="input-wrapper">
+                    <span class="input-icon">👤</span>
+                    <input id="reg-username" type="text" formControlName="username" class="field-input"
+                        placeholder="admin_empresa" autocomplete="username" />
+                </div>
+                @if (usernameControl.touched && usernameControl.hasError('required')) {
+                <span class="field-error">El usuario es requerido.</span>
+                }
+                @if (usernameControl.touched && usernameControl.hasError('minlength')) {
+                <span class="field-error">Mínimo 3 caracteres.</span>
+                }
+                @if (usernameControl.touched && usernameControl.hasError('pattern')) {
+                <span class="field-error">El usuario no puede contener espacios.</span>
+                }
+            </div>
+
+            <!-- Email -->
+            <div class="field-group" [class.has-error]="emailControl.invalid && emailControl.touched">
+                <label for="reg-email" class="field-label">Email empresarial</label>
+                <div class="input-wrapper">
+                    <span class="input-icon">✉️</span>
+                    <input id="reg-email" type="email" formControlName="email" class="field-input"
+                        placeholder="empresa@ejemplo.com" autocomplete="email" />
+                </div>
+                @if (emailControl.touched && emailControl.hasError('required')) {
+                <span class="field-error">El email es requerido.</span>
+                }
+                @if (emailControl.touched && emailControl.hasError('email')) {
+                <span class="field-error">Ingresa un email válido.</span>
+                }
+            </div>
+
+            <!-- Contraseña -->
+            <div class="field-group" [class.has-error]="passwordControl.invalid && passwordControl.touched">
+                <label for="reg-password" class="field-label">Contraseña</label>
+                <div class="input-wrapper">
+                    <span class="input-icon">🔒</span>
+                    <input id="reg-password" [type]="showPassword() ? 'text' : 'password'" formControlName="password"
+                        class="field-input" placeholder="Mínimo 6 caracteres" autocomplete="new-password" />
+                    <button type="button" class="toggle-btn" (click)="togglePassword()">
+                        {{ showPassword() ? '🙈' : '👁️' }}
+                    </button>
+                </div>
+                @if (passwordControl.touched && passwordControl.hasError('required')) {
+                <span class="field-error">La contraseña es requerida.</span>
+                }
+                @if (passwordControl.touched && passwordControl.hasError('minlength')) {
+                <span class="field-error">Mínimo 6 caracteres.</span>
+                }
+            </div>
+
+            <!-- Confirmar contraseña -->
+            <div class="field-group"
+                [class.has-error]="(confirmPasswordControl.touched && confirmPasswordControl.hasError('required')) || passwordMismatch">
+                <label for="reg-confirm" class="field-label">Confirmar contraseña</label>
+                <div class="input-wrapper">
+                    <span class="input-icon">🔐</span>
+                    <input id="reg-confirm" [type]="showConfirmPassword() ? 'text' : 'password'"
+                        formControlName="confirmPassword" class="field-input" placeholder="Repetí la contraseña"
+                        autocomplete="new-password" />
+                    <button type="button" class="toggle-btn" (click)="toggleConfirmPassword()">
+                        {{ showConfirmPassword() ? '🙈' : '👁️' }}
+                    </button>
+                </div>
+                @if (confirmPasswordControl.touched && confirmPasswordControl.hasError('required')) {
+                <span class="field-error">Confirma tu contraseña.</span>
+                }
+                @if (passwordMismatch) {
+                <span class="field-error">Las contraseñas no coinciden.</span>
+                }
+            </div>
+
+            <!-- Error / Success -->
+            @if (errorMessage()) {
+            <div class="alert-error">
+                <span>⚠️</span> {{ errorMessage() }}
+            </div>
+            }
+            @if (successMessage()) {
+            <div class="alert-success">
+                <span>✅</span> {{ successMessage() }}
+            </div>
+            }
+
+            <!-- Submit -->
+            <button type="submit" class="btn-primary" [disabled]="isLoading()">
+                @if (isLoading()) {
+                <span class="spinner"></span> Registrando...
+                } @else {
+                Crear cuenta
+                }
+            </button>
+
+            <div class="auth-footer">
+                ¿Ya tenés cuenta?
+                <a routerLink="/login" class="auth-link">Inicia sesión</a>
+            </div>
+
+        </form>
+    </div>
+</div>

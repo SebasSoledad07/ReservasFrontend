@@ -1,0 +1,81 @@
+<section class="reserva-form-page">
+  @if (errorMessage(); as mensajeError) {
+    <div class="toast toast-error">
+      <span>{{ mensajeError }}</span>
+      <button
+        type="button"
+        class="toast-close"
+        (click)="cerrarError()"
+        aria-label="Cerrar notificación"
+      >
+        ✕
+      </button>
+    </div>
+  }
+
+  <div class="reserva-form-card">
+    <div class="form-header">
+      <h1>Nueva reserva</h1>
+      <a routerLink="/reservas" class="btn-volver">← Volver a la lista</a>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="enviar()" novalidate>
+      <div class="campo">
+        <label for="clientName">Nombre del cliente</label>
+        <input
+          id="clientName"
+          type="text"
+          formControlName="clientName"
+          placeholder="Nombre y apellidos"
+        />
+        @if (form.controls.clientName.touched && form.controls.clientName.invalid) {
+          <p class="error">El nombre del cliente es obligatorio.</p>
+        }
+      </div>
+
+      <div class="campo doble">
+        <div>
+          <label for="date">Fecha</label>
+          <input id="date" type="date" formControlName="date" />
+          @if (form.controls.date.touched && form.controls.date.invalid) {
+            <p class="error">La fecha es obligatoria.</p>
+          }
+        </div>
+
+        <div>
+          <label for="time">Hora</label>
+          <input id="time" type="time" formControlName="time" />
+          @if (form.controls.time.touched && form.controls.time.invalid) {
+            <p class="error">La hora es obligatoria.</p>
+          }
+        </div>
+      </div>
+
+      <div class="campo">
+        <label for="serviceName">Servicio</label>
+        <select id="serviceName" formControlName="serviceName">
+          <option value="" disabled>Selecciona un servicio</option>
+          @for (servicio of servicios; track servicio.id) {
+            <option [value]="servicio.nombre">
+              {{ servicio.nombre }}
+            </option>
+          }
+        </select>
+        @if (form.controls.serviceName.touched && form.controls.serviceName.invalid) {
+          <p class="error">El servicio es obligatorio.</p>
+        }
+      </div>
+
+      <div class="form-actions">
+      <a routerLink="/reservas" class="btn-volver-sec">Volver a la lista</a>
+      <button
+        type="submit"
+        class="btn-primario"
+        [disabled]="form.invalid || isSubmitting()"
+      >
+        {{ isSubmitting() ? 'Guardando…' : 'Crear reserva' }}
+      </button>
+    </div>
+    </form>
+  </div>
+</section>

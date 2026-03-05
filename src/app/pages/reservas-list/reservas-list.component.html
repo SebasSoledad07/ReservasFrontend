@@ -1,0 +1,77 @@
+<section class="reservas-list">
+  <div class="header-reservas">
+    <div class="header-left">
+      <p class="company-tag">🏢 {{ companyDisplayName() }}</p>
+      <h1>Panel de Reservas</h1>
+      <p class="header-subtitle">Gestioná todas las reservas de tu empresa</p>
+    </div>
+    <div class="header-actions">
+      <a routerLink="/reservas/nueva" class="btn-nueva">+ Nueva reserva</a>
+      <button type="button" class="btn-logout" (click)="logout()">Cerrar sesión</button>
+    </div>
+  </div>
+
+  <!-- Banner con link público para compartir (solo si el backend envía slug) -->
+  @if (publicLink()) {
+  <div class="public-link-banner">
+    <div class="public-link-info">
+      <span class="public-link-icon">🔗</span>
+      <div>
+        <p class="public-link-label">Link público de tu empresa</p>
+        <p class="public-link-url">{{ publicLink() }}</p>
+      </div>
+    </div>
+    <button type="button" class="btn-copy" [class.copied]="linkCopiado()" (click)="copyLink()">
+      {{ linkCopiado() ? '✅ Copiado' : '📋 Copiar' }}
+    </button>
+  </div>
+  }
+
+  @if (reservas$ | async; as reservas) {
+  @if (reservas.length === 0) {
+  <p class="empty">No hay reservas.</p>
+  } @else {
+  <table class="tabla-reservas">
+    <thead>
+      <tr>
+        <th>Cliente</th>
+        <th>Fecha</th>
+        <th>Hora</th>
+        <th>Servicio</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (reserva of reservas; track reserva.id) {
+      <tr [class.cancelada]="reserva.status === 'CANCELED'">
+        <td>{{ reserva.clientName }}</td>
+        <td>{{ reserva.date }}</td>
+        <td>{{ reserva.time }}</td>
+        <td>{{ reserva.serviceName }}</td>
+        <td>
+          <span [class.estado-activa]="reserva.status === 'ACTIVE'"
+            [class.estado-cancelada]="reserva.status === 'CANCELED'">
+            {{ reserva.status === 'ACTIVE' ? 'Activa' : 'Cancelada' }}
+          </span>
+        </td>
+        <td>
+          @if (reserva.status === 'ACTIVE') {
+          <button class="btn-cancelar" (click)="cancelar(reserva)">
+            Cancelar
+          </button>
+          <!--} @else {
+                  <button type="button" class="btn-eliminar" (click)="eliminar(reserva)">
+                    Eliminar
+                  </button> -->
+          }
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+  }
+  } @else {
+  <p class="cargando">Cargando reservas…</p>
+  }
+</section>
