@@ -1,4 +1,5 @@
 export const environment = {
-  apiUrl: 'http://localhost:8080',
+  apiUrl: 'https://reservasbackend-production-f19e.up.railway.app',
 };
+
 
