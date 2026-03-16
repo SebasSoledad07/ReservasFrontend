@@ -21,7 +21,6 @@ export const routes: Routes = [
       ),
   },
   {
-    // Ruta PÚBLICA — cualquiera puede reservar sin autenticación
     path: 'publico/:slug',
     loadComponent: () =>
       import('./pages/public-booking/public-booking.component').then(
@@ -44,7 +43,28 @@ export const routes: Routes = [
         (m) => m.ReservaFormComponent,
       ),
   },
-  { path: '**', redirectTo: 'login' },
+  {
+    path: 'unauthorized',
+    loadComponent: () =>
+      import('./pages/unauthorized/unauthorized.component').then(
+        (m) => m.UnauthorizedComponent,
+      ),
+  },
+  {
+    path: 'not-found',
+    loadComponent: () =>
+      import('./pages/not-found/not-found.component').then(
+        (m) => m.NotFoundComponent,
+      ),
+  },
+  {
+    path: '**',
+    loadComponent: () =>
+      import('./pages/not-found/not-found.component').then(
+        (m) => m.NotFoundComponent,
+      ),
+  },
 ];
+
 
 
