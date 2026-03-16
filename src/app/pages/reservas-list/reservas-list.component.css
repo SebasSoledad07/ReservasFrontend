@@ -383,23 +383,94 @@
     padding: 1.25rem 0.75rem 2rem;
   }
 
-  .reservas-list h1 {
-    font-size: 1.5rem;
-  }
-
+  /* Header */
   .header-reservas {
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: flex-start;
     gap: 0.75rem;
+    margin-bottom: 1.25rem;
   }
 
+  .header-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .reservas-list h1 {
+    font-size: 1.4rem;
+  }
+
+  /* Public link card — compact on mobile */
+  .public-link-card {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .plc-left {
+    gap: 0.65rem;
+  }
+
+  .plc-icon {
+    font-size: 1.3rem;
+  }
+
+  .plc-title {
+    font-size: 0.78rem;
+  }
+
+  .plc-desc {
+    font-size: 0.75rem;
+    display: none; /* ocultar descripción en pantallas pequeñas */
+  }
+
+  /* URL truncada con elipsis en lugar de ocupar toda la pantalla */
+  .plc-url {
+    font-size: 0.72rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: calc(100vw - 5rem);
+  }
+
+  .plc-actions {
+    width: 100%;
+    gap: 0.5rem;
+  }
+
+  .btn-copy,
+  .btn-open-link {
+    flex: 1;
+    text-align: center;
+    justify-content: center;
+    padding: 0.6rem 0.75rem;
+    font-size: 0.8rem;
+  }
+
+  /* Table — horizontal scroll */
   .tabla-reservas {
     display: block;
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
     border-radius: 12px;
   }
 
   .tabla-reservas th,
   .tabla-reservas td {
     white-space: nowrap;
+    padding: 0.65rem 0.75rem;
+    font-size: 0.8rem;
   }
 }
+
+@media (max-width: 420px) {
+  .btn-nueva,
+  .btn-logout {
+    font-size: 0.78rem;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .plc-url {
+    max-width: calc(100vw - 3.5rem);
+  }
+}
