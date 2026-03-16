@@ -24,6 +24,26 @@
                 }
             </div>
 
+            <!-- Slug del link público -->
+            <div class="field-group" [class.has-error]="slugControl.invalid && slugControl.touched">
+                <label for="reg-slug" class="field-label">
+                    Link público de reservas
+                    <span class="field-optional">(opcional)</span>
+                </label>
+                <div class="input-wrapper">
+                    <span class="input-icon">🔗</span>
+                    <input id="reg-slug" type="text" formControlName="slug" class="field-input"
+                        placeholder="mi-empresa" autocomplete="off" />
+                </div>
+                <span class="field-hint">
+                    Solo minúsculas, números y guiones. Ej: <code>mi-negocio</code>
+                    → tu link será <code>/public/mi-negocio/reserva</code>
+                </span>
+                @if (slugControl.touched && slugControl.hasError('pattern')) {
+                <span class="field-error">Solo minúsculas, números y guiones (sin espacios ni caracteres especiales).</span>
+                }
+            </div>
+
             <!-- Usuario (admin) -->
             <div class="field-group" [class.has-error]="usernameControl.invalid && usernameControl.touched">
                 <label for="reg-username" class="field-label">Nombre de usuario (admin)</label>

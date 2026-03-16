@@ -184,6 +184,31 @@
     padding-left: 0.25rem;
 }
 
+.field-optional {
+    font-size: 0.7rem;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.35);
+    text-transform: none;
+    letter-spacing: 0;
+    margin-left: 0.3rem;
+}
+
+.field-hint {
+    font-size: 0.72rem;
+    color: rgba(255, 255, 255, 0.35);
+    line-height: 1.4;
+    padding-left: 0.25rem;
+}
+
+.field-hint code {
+    font-family: 'Menlo', 'Consolas', monospace;
+    background: rgba(255, 255, 255, 0.07);
+    padding: 0.05rem 0.3rem;
+    border-radius: 4px;
+    color: #22d3ee;
+    font-size: 0.7rem;
+}
+
 .alert-error {
     display: flex;
     align-items: center;

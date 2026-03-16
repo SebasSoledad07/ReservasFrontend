@@ -13,7 +13,11 @@ export const authInterceptor: HttpInterceptorFn = (
   const authService = inject(AuthService);
 
   // Las rutas públicas y de auth no necesitan token
-  if (req.url.includes('/auth/') || req.url.includes('/publico/')) {
+  if (
+    req.url.includes('/auth/') ||
+    req.url.includes('/publico/') ||
+    req.url.includes('/public/')
+  ) {
     return next(req);
   }
 

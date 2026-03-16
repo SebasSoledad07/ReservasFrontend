@@ -41,10 +41,11 @@ export class RegisterComponent {
   readonly showPassword = signal(false);
   readonly showConfirmPassword = signal(false);
 
-  // Backend RegisterRequestDTO: { companyName, username, password, email }
+  // Backend RegisterRequestDTO: { companyName, slug?, username, password, email }
   readonly form = this.fb.group(
     {
       companyName: ['', [Validators.required, Validators.minLength(2)]],
+      slug: ['', [Validators.pattern(/^[a-z0-9]+(?:-[a-z0-9]+)*$/)]],
       username: ['', [Validators.required, Validators.minLength(3), Validators.pattern(/^\S+$/)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
@@ -53,25 +54,12 @@ export class RegisterComponent {
     { validators: passwordMatchValidator },
   );
 
-  get companyNameControl() {
-    return this.form.get('companyName')!;
-  }
-
-  get usernameControl() {
-    return this.form.get('username')!;
-  }
-
-  get emailControl() {
-    return this.form.get('email')!;
-  }
-
-  get passwordControl() {
-    return this.form.get('password')!;
-  }
-
-  get confirmPasswordControl() {
-    return this.form.get('confirmPassword')!;
-  }
+  get companyNameControl() { return this.form.get('companyName')!; }
+  get slugControl() { return this.form.get('slug')!; }
+  get usernameControl() { return this.form.get('username')!; }
+  get emailControl() { return this.form.get('email')!; }
+  get passwordControl() { return this.form.get('password')!; }
+  get confirmPasswordControl() { return this.form.get('confirmPassword')!; }
 
   get passwordMismatch() {
     return (
@@ -80,13 +68,8 @@ export class RegisterComponent {
     );
   }
 
-  togglePassword(): void {
-    this.showPassword.update((v) => !v);
-  }
-
-  toggleConfirmPassword(): void {
-    this.showConfirmPassword.update((v) => !v);
-  }
+  togglePassword(): void { this.showPassword.update((v) => !v); }
+  toggleConfirmPassword(): void { this.showConfirmPassword.update((v) => !v); }
 
   onSubmit(): void {
     if (this.form.invalid) {
@@ -98,11 +81,12 @@ export class RegisterComponent {
     this.errorMessage.set('');
     this.successMessage.set('');
 
-    const { companyName, username, email, password } = this.form.value;
+    const { companyName, slug, username, email, password } = this.form.value;
 
     this.authService
       .register({
         companyName: companyName!,
+        slug: slug?.trim() || undefined,  // opcional: el backend genera el slug si está vacío
         username: username!,
         email: email!,
         password: password!,
@@ -110,12 +94,10 @@ export class RegisterComponent {
       .subscribe({
         next: () => {
           this.isLoading.set(false);
-          this.successMessage.set(
-            '¡Empresa registrada! Redirigiendo a tu panel...',
-          );
+          this.successMessage.set('¡Empresa registrada! Redirigiendo a tu panel...');
           setTimeout(() => this.router.navigate(['/reservas']), 1500);
         },
-        error: (err) => {
+        error: (err: { error?: { message?: string } }) => {
           this.isLoading.set(false);
           this.errorMessage.set(
             err?.error?.message ?? 'No se pudo registrar. Intenta de nuevo.',

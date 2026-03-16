@@ -10,6 +10,7 @@ export interface RegisterDto {
   username: string;
   password: string;
   email: string;
+  slug?: string;  // identificador del link público (opcional, el backend lo genera si no se envía)
 }
 
 // AuthResponseDTO que devuelve el backend (estructura plana, sin objeto user anidado)

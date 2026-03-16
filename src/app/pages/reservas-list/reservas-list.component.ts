@@ -36,12 +36,14 @@ export class ReservasListComponent implements OnInit {
   });
 
   /** Link público para compartir.
-   *  Usa el slug del JWT si el backend lo devuelve; si no, usa el username como fallback.
-   *  Asegurá que el slug/username coincide con lo configurado en el backend. */
+   *  Prioridad: slug del JWT → username. Normaliza a lowercase con guiones. */
   readonly publicLink = computed(() => {
     const user = this.authService.currentUser();
-    const slug = user?.slug ?? user?.username;
-    return slug ? `${window.location.origin}/publico/${slug}/reservas` : null;
+    const raw = user?.slug ?? user?.username ?? '';
+    if (!raw.trim()) return null;
+    // Normaliza: minúsculas, reemplaza espacios por guiones
+    const slug = raw.trim().toLowerCase().replace(/\s+/g, '-');
+    return `${window.location.origin}/publico/${slug}/reserva`;
   });
 
   copyLink(): void {
