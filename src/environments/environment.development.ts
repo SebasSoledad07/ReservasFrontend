@@ -1,5 +1,5 @@
 export const environment = {
-  apiUrl: 'https://reservasbackend-production-f19e.up.railway.app',
+  apiUrl: 'https://reservas-backend-cr3s.onrender.com',
 };
 
 
