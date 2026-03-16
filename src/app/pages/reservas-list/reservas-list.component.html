@@ -3,7 +3,7 @@
     <div class="header-left">
       <p class="company-tag">🏢 {{ companyDisplayName() }}</p>
       <h1>Panel de Reservas</h1>
-      <p class="header-subtitle">Gestioná todas las reservas de tu empresa</p>
+      <p class="header-subtitle">Gestiona todas las reservas de tu empresa</p>
     </div>
     <div class="header-actions">
       <a routerLink="/reservas/nueva" class="btn-nueva">+ Nueva reserva</a>
@@ -11,19 +11,27 @@
     </div>
   </div>
 
-  <!-- Banner con link público para compartir (solo si el backend envía slug) -->
+  <!-- ===== Sección link público ===== -->
   @if (publicLink()) {
-  <div class="public-link-banner">
-    <div class="public-link-info">
-      <span class="public-link-icon">🔗</span>
-      <div>
-        <p class="public-link-label">Link público de tu empresa</p>
-        <p class="public-link-url">{{ publicLink() }}</p>
+  <div class="public-link-section">
+    <div class="public-link-card">
+      <div class="plc-left">
+        <span class="plc-icon">🔗</span>
+        <div class="plc-text">
+          <p class="plc-title">Link de reservas para tus clientes</p>
+          <p class="plc-desc">Comparte este link y tus clientes podrán reservar un turno sin necesitar cuenta.</p>
+          <code class="plc-url">{{ publicLink() }}</code>
+        </div>
+      </div>
+      <div class="plc-actions">
+        <button type="button" class="btn-copy" [class.copied]="linkCopiado()" (click)="copyLink()">
+          {{ linkCopiado() ? '✅ ¡Copiado!' : '📋 Copiar link' }}
+        </button>
+        <a [href]="publicLink()" target="_blank" class="btn-open-link">
+          Abrir ↗
+        </a>
       </div>
     </div>
-    <button type="button" class="btn-copy" [class.copied]="linkCopiado()" (click)="copyLink()">
-      {{ linkCopiado() ? '✅ Copiado' : '📋 Copiar' }}
-    </button>
   </div>
   }
 

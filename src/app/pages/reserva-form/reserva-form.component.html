@@ -1,4 +1,9 @@
 <section class="reserva-form-page">
+  @if (successMessage(); as msg) {
+    <div class="toast toast-success">
+      <span>{{ msg }}</span>
+    </div>
+  }
   @if (errorMessage(); as mensajeError) {
     <div class="toast toast-error">
       <span>{{ mensajeError }}</span>

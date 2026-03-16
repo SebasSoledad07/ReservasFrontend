@@ -35,9 +35,12 @@ export class ReservasListComponent implements OnInit {
     return user?.companyName ?? user?.username ?? 'Mi empresa';
   });
 
-  /** Link público para compartir */
+  /** Link público para compartir.
+   *  Usa el slug del JWT si el backend lo devuelve; si no, usa el username como fallback.
+   *  Asegurá que el slug/username coincide con lo configurado en el backend. */
   readonly publicLink = computed(() => {
-    const slug = this.authService.currentUser()?.slug;
+    const user = this.authService.currentUser();
+    const slug = user?.slug ?? user?.username;
     return slug ? `${window.location.origin}/publico/${slug}` : null;
   });
 
