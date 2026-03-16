@@ -21,7 +21,7 @@ export const routes: Routes = [
       ),
   },
   {
-    path: 'publico/:slug',
+    path: 'publico/:slug/reservas',
     loadComponent: () =>
       import('./pages/public-booking/public-booking.component').then(
         (m) => m.PublicBookingComponent,

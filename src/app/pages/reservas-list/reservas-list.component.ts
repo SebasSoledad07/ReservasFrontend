@@ -41,7 +41,7 @@ export class ReservasListComponent implements OnInit {
   readonly publicLink = computed(() => {
     const user = this.authService.currentUser();
     const slug = user?.slug ?? user?.username;
-    return slug ? `${window.location.origin}/publico/${slug}` : null;
+    return slug ? `${window.location.origin}/publico/${slug}/reservas` : null;
   });
 
   copyLink(): void {
