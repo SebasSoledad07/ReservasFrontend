@@ -43,7 +43,7 @@ export class ReservasListComponent implements OnInit {
     if (!raw.trim()) return null;
     // Normaliza: minúsculas, reemplaza espacios por guiones
     const slug = raw.trim().toLowerCase().replace(/\s+/g, '-');
-    return `${window.location.origin}/publico/${slug}/reserva`;
+    return `${window.location.origin}/publico/${slug}/reservas`;
   });
 
   copyLink(): void {
