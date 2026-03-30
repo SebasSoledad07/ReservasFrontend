@@ -6,9 +6,34 @@ import {
   inject,
   signal,
 } from '@angular/core';
-import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
+import {
+  ReactiveFormsModule,
+  FormBuilder,
+  Validators,
+  AbstractControl,
+  ValidationErrors,
+} from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { PublicBookingService } from '../../services/public-booking.service';
+
+/** Valida que la fecha no sea anterior a hoy */
+export function fechaNoAnteriorValidator(control: AbstractControl): ValidationErrors | null {
+  if (!control.value) return null;
+  const hoy = new Date();
+  hoy.setHours(0, 0, 0, 0);
+  const seleccionada = new Date(control.value + 'T00:00:00');
+  return seleccionada < hoy ? { fechaPasada: true } : null;
+}
+
+/** Valida que la hora esté entre 08:00 y 21:00 */
+export function horaRangoValidator(control: AbstractControl): ValidationErrors | null {
+  if (!control.value) return null;
+  const [h, m] = control.value.split(':').map(Number);
+  const minutos = h * 60 + m;
+  if (minutos < 8 * 60) return { horaMinima: true };
+  if (minutos > 21 * 60) return { horaMaxima: true };
+  return null;
+}
 
 @Component({
   selector: 'app-public-booking',
@@ -46,10 +71,15 @@ export class PublicBookingComponent implements OnInit {
 
   readonly form = this.fb.group({
     clientName: ['', [Validators.required, Validators.minLength(2)]],
-    date: ['', Validators.required],
-    time: ['', Validators.required],
+    date: ['', [Validators.required, fechaNoAnteriorValidator]],
+    time: ['', [Validators.required, horaRangoValidator]],
     serviceName: ['', Validators.required],
   });
+
+  /** Mínima hora permitida (08:00) */
+  readonly minTime = '08:00';
+  /** Máxima hora permitida (21:00) */
+  readonly maxTime = '21:00';
 
   get clientNameControl() { return this.form.get('clientName')!; }
   get dateControl() { return this.form.get('date')!; }

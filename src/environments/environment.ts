@@ -1,5 +1,4 @@
 export const environment = {
-  apiUrl: 'https://reservas-backend-v2.onrender.com',
+  production: true,
+  apiUrl: 'https://reservas-backend-798205080573.us-central1.run.app'
 };
-
-

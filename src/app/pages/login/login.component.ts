@@ -5,7 +5,7 @@ import {
   signal,
 } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -18,7 +18,6 @@ import { AuthService } from '../../services/auth.service';
 export class LoginComponent {
   private readonly fb = inject(FormBuilder);
   private readonly authService = inject(AuthService);
-  private readonly router = inject(Router);
 
   readonly isLoading = signal(false);
   readonly errorMessage = signal('');
@@ -56,7 +55,6 @@ export class LoginComponent {
     this.authService.login({ username: username!, password: password! }).subscribe({
       next: () => {
         this.isLoading.set(false);
-        this.router.navigate(['/reservas']);
       },
       error: (err) => {
         this.isLoading.set(false);

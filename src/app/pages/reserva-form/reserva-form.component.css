@@ -6,7 +6,7 @@
   align-items: center;
   justify-content: flex-start;
   padding: 2.5rem 1rem 3rem;
-  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  background: linear-gradient(135deg, #0e0508, #1a0812, #0f0309);
   font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
   position: relative;
   overflow: hidden;
@@ -17,8 +17,8 @@
   position: fixed;
   inset: 0;
   background:
-    radial-gradient(ellipse at 15% 40%, rgba(120, 50, 255, 0.12) 0%, transparent 55%),
-    radial-gradient(ellipse at 80% 10%, rgba(56, 189, 248, 0.08) 0%, transparent 50%);
+    radial-gradient(ellipse at 15% 40%, rgba(190, 24, 93, 0.14) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 10%, rgba(201, 162, 39, 0.08) 0%, transparent 50%);
   pointer-events: none;
   z-index: 0;
 }
@@ -30,7 +30,7 @@
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(219, 39, 119, 0.18);
   border-radius: 24px;
   padding: 2.25rem 2rem;
   box-shadow:
@@ -68,7 +68,7 @@
   font-size: 1.55rem;
   font-weight: 800;
   letter-spacing: -0.4px;
-  background: linear-gradient(135deg, #e2d9f3, #a78bfa);
+  background: linear-gradient(135deg, #fce7f3, #ec4899);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -76,14 +76,14 @@
 
 .btn-volver {
   font-size: 0.85rem;
-  color: #a78bfa;
+  color: #f472b6;
   text-decoration: none;
   font-weight: 600;
   transition: color 0.2s;
 }
 
 .btn-volver:hover {
-  color: #c4b5fd;
+  color: #fce7f3;
   text-decoration: underline;
 }
 
@@ -106,47 +106,37 @@
 .campo select {
   width: 100%;
   padding: 0.75rem 0.9rem;
-  background: rgba(255, 255, 255, 0.07);
-  border: 1.5px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1.5px solid rgba(219, 39, 119, 0.18);
   border-radius: 12px;
-  color: #fff;
+  color: #fce7f3;
   font-size: 0.95rem;
   outline: none;
   transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
   box-sizing: border-box;
 }
 
-.campo input::placeholder {
-  color: rgba(255, 255, 255, 0.3);
-}
+.campo input::placeholder { color: rgba(252, 231, 243, 0.28); }
 
-/* Date & time pickers: force light text */
 .campo input[type="date"],
-.campo input[type="time"] {
-  color-scheme: dark;
-  color: rgba(255, 255, 255, 0.85);
-}
+.campo input[type="time"] { color-scheme: dark; color: rgba(252, 231, 243, 0.85); }
 
-/* Select dropdown */
 .campo select {
   appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.5)' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.4)' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 0.9rem center;
   padding-right: 2.5rem;
   cursor: pointer;
 }
 
-.campo select option {
-  background: #302b63;
-  color: #fff;
-}
+.campo select option { background: #1a0812; color: #fce7f3; }
 
 .campo input:focus,
 .campo select:focus {
-  border-color: #a78bfa;
-  background: rgba(167, 139, 250, 0.08);
-  box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.2);
+  border-color: #ec4899;
+  background: rgba(219, 39, 119, 0.08);
+  box-shadow: 0 0 0 3px rgba(219, 39, 119, 0.18);
 }
 
 .campo.doble {
@@ -199,18 +189,18 @@
   font-size: 0.95rem;
   font-weight: 700;
   color: #fff;
-  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  background: linear-gradient(135deg, #9d174d, #db2777, #ec4899);
   border: none;
   border-radius: 12px;
   cursor: pointer;
-  box-shadow: 0 4px 15px rgba(124, 58, 237, 0.5);
+  box-shadow: 0 4px 18px rgba(190, 24, 93, 0.55);
   transition: transform 0.15s, box-shadow 0.15s, opacity 0.15s;
   letter-spacing: 0.2px;
 }
 
 .btn-primario:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(124, 58, 237, 0.65);
+  box-shadow: 0 8px 28px rgba(190, 24, 93, 0.7);
 }
 
 .btn-primario:active:not(:disabled) {
@@ -248,9 +238,9 @@
 }
 
 .toast-success {
-  background: rgba(52, 211, 153, 0.15);
-  color: #6ee7b7;
-  border: 1px solid rgba(52, 211, 153, 0.35);
+  background: rgba(219, 39, 119, 0.12);
+  color: #f9a8d4;
+  border: 1px solid rgba(219, 39, 119, 0.3);
 }
 
 .toast-close {

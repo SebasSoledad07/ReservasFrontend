@@ -1,3 +1,4 @@
 export const environment = {
-  apiUrl: 'http://localhost:8080',
+  production: false,
+  apiUrl: 'https://reservas-backend-798205080573.us-central1.run.app',
 };

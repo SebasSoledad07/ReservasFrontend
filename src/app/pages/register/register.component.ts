@@ -11,7 +11,7 @@ import {
   AbstractControl,
   ValidationErrors,
 } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
 function passwordMatchValidator(
@@ -33,7 +33,6 @@ function passwordMatchValidator(
 export class RegisterComponent {
   private readonly fb = inject(FormBuilder);
   private readonly authService = inject(AuthService);
-  private readonly router = inject(Router);
 
   readonly isLoading = signal(false);
   readonly errorMessage = signal('');
@@ -95,7 +94,6 @@ export class RegisterComponent {
         next: () => {
           this.isLoading.set(false);
           this.successMessage.set('¡Empresa registrada! Redirigiendo a tu panel...');
-          setTimeout(() => this.router.navigate(['/reservas']), 1500);
         },
         error: (err: { error?: { message?: string } }) => {
           this.isLoading.set(false);

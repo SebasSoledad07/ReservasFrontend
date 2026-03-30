@@ -5,7 +5,7 @@
   flex-direction: column;
   align-items: stretch;
   padding: 2rem 1.5rem 3rem;
-  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  background: linear-gradient(135deg, #0e0508, #1a0812, #0f0309);
   font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
   position: relative;
   overflow-x: hidden;
@@ -16,8 +16,8 @@
   position: fixed;
   inset: 0;
   background:
-    radial-gradient(ellipse at 10% 30%, rgba(120, 50, 255, 0.12) 0%, transparent 55%),
-    radial-gradient(ellipse at 85% 10%, rgba(56, 189, 248, 0.08) 0%, transparent 50%);
+    radial-gradient(ellipse at 10% 30%, rgba(190, 24, 93, 0.13) 0%, transparent 55%),
+    radial-gradient(ellipse at 85% 10%, rgba(201, 162, 39, 0.08) 0%, transparent 50%);
   pointer-events: none;
   z-index: 0;
 }
@@ -46,7 +46,7 @@
   font-size: 1.9rem;
   font-weight: 800;
   letter-spacing: -0.5px;
-  background: linear-gradient(135deg, #e2d9f3, #a78bfa);
+  background: linear-gradient(135deg, #fce7f3, #ec4899);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -56,7 +56,7 @@
   margin: 0 0 0.15rem;
   font-size: 0.8rem;
   font-weight: 700;
-  color: #a78bfa;
+  color: #f472b6;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
@@ -79,17 +79,17 @@
   font-size: 0.9rem;
   font-weight: 700;
   color: #fff;
-  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  background: linear-gradient(135deg, #9d174d, #db2777);
   border-radius: 12px;
   text-decoration: none;
-  box-shadow: 0 4px 15px rgba(124, 58, 237, 0.45);
+  box-shadow: 0 4px 15px rgba(190, 24, 93, 0.45);
   transition: transform 0.15s, box-shadow 0.15s;
   white-space: nowrap;
 }
 
 .btn-nueva:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(124, 58, 237, 0.65);
+  box-shadow: 0 8px 25px rgba(190, 24, 93, 0.65);
 }
 
 .btn-logout {
@@ -473,4 +473,4 @@
   .plc-url {
     max-width: calc(100vw - 3.5rem);
   }
-}
+}

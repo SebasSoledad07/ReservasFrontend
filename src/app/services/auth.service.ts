@@ -51,6 +51,7 @@ export class AuthService {
         localStorage.setItem(TOKEN_KEY, response.token);
         localStorage.setItem(USER_KEY, JSON.stringify(user));
         this._currentUser.set(user);
+        this.navigateAfterAuth();
       }),
     );
   }
@@ -68,8 +69,13 @@ export class AuthService {
         localStorage.setItem(TOKEN_KEY, response.token);
         localStorage.setItem(USER_KEY, JSON.stringify(user));
         this._currentUser.set(user);
+        this.navigateAfterAuth();
       }),
     );
+  }
+
+  private navigateAfterAuth(): void {
+    this.router.navigate(['/reservas']);
   }
 
   logout(): void {

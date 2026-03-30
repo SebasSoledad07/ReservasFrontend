@@ -4,6 +4,10 @@ import { Router, RouterLink } from '@angular/router';
 
 import { ReservaService } from '../../services/reserva.service';
 import type { CrearReservaDto } from '../../models/reserva.model';
+import {
+  fechaNoAnteriorValidator,
+  horaRangoValidator,
+} from '../public-booking/public-booking.component';
 
 @Component({
   selector: 'app-reserva-form',
@@ -31,10 +35,15 @@ export class ReservaFormComponent {
 
   protected readonly form = this.fb.nonNullable.group({
     clientName: ['', Validators.required],
-    date: ['', Validators.required],
-    time: ['', Validators.required],
+    date: ['', [Validators.required, fechaNoAnteriorValidator]],
+    time: ['', [Validators.required, horaRangoValidator]],
     serviceName: ['', Validators.required],
   });
+
+  /** Mínima fecha: hoy */
+  readonly today = new Date().toISOString().split('T')[0];
+  readonly minTime = '08:00';
+  readonly maxTime = '21:00';
 
   enviar(): void {
     if (this.form.invalid) {

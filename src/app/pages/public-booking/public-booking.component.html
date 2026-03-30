@@ -1,4 +1,4 @@
-<!-- =================== FORMULARIO (siempre visible) =================== -->
+<!-- =================== FORMULARIO =================== -->
 @if (!isSubmitted()) {
 <div class="booking-page">
     <div class="booking-card">
@@ -40,16 +40,26 @@
                     @if (dateControl.touched && dateControl.hasError('required')) {
                     <span class="field-error">La fecha es requerida.</span>
                     }
+                    @if (dateControl.touched && dateControl.hasError('fechaPasada')) {
+                    <span class="field-error">No podés seleccionar una fecha pasada.</span>
+                    }
                 </div>
 
                 <div class="field-group" [class.has-error]="timeControl.invalid && timeControl.touched">
                     <label for="pub-time" class="field-label">Hora</label>
                     <div class="input-wrapper">
                         <span class="input-icon">🕐</span>
-                        <input id="pub-time" type="time" formControlName="time" class="field-input" />
+                        <input id="pub-time" type="time" formControlName="time" class="field-input"
+                            [min]="minTime" [max]="maxTime" />
                     </div>
                     @if (timeControl.touched && timeControl.hasError('required')) {
                     <span class="field-error">La hora es requerida.</span>
+                    }
+                    @if (timeControl.touched && timeControl.hasError('horaMinima')) {
+                    <span class="field-error">El horario de atención empieza a las 08:00 hs.</span>
+                    }
+                    @if (timeControl.touched && timeControl.hasError('horaMaxima')) {
+                    <span class="field-error">El último turno es a las 21:00 hs.</span>
                     }
                 </div>
 
@@ -60,12 +70,13 @@
                 <label for="pub-service" class="field-label">Servicio</label>
                 <div class="input-wrapper">
                     <span class="input-icon">✂️</span>
-                    <select id="pub-service" formControlName="serviceName" class="field-input">
+                    <select id="pub-service" formControlName="serviceName" class="field-input field-select">
                         <option value="" disabled>Seleccioná un servicio</option>
                         @for (s of servicios; track s) {
                         <option [value]="s">{{ s }}</option>
                         }
                     </select>
+                    <span class="select-arrow">▼</span>
                 </div>
                 @if (serviceControl.touched && serviceControl.hasError('required')) {
                 <span class="field-error">El servicio es requerido.</span>
@@ -74,15 +85,15 @@
 
             <!-- Error general -->
             @if (errorMessage()) {
-            <div class="alert-error">
+            <div class="toast toast-error">
                 <span>⚠️</span> {{ errorMessage() }}
             </div>
             }
 
             <!-- Submit -->
-            <button type="submit" class="btn-primary" [disabled]="isLoading()">
+            <button type="submit" class="btn-submit" [disabled]="isLoading()">
                 @if (isLoading()) {
-                <span class="spinner"></span> Reservando...
+                <span class="spinner-lg"></span> Reservando...
                 } @else {
                 Reservar turno
                 }
@@ -96,13 +107,15 @@
 <!-- =================== ESTADO: Reserva confirmada =================== -->
 @if (isSubmitted()) {
 <div class="booking-page">
-    <div class="booking-card success-card">
-        <div class="success-icon">🎉</div>
-        <h1 class="success-title">¡Reserva confirmada!</h1>
-        <p class="success-desc">Tu turno fue registrado exitosamente. ¡Te esperamos!</p>
-        <button type="button" class="btn-secondary" (click)="resetForm()">
-            Hacer otra reserva
-        </button>
+    <div class="booking-card">
+        <div class="booking-success">
+            <div class="success-icon">🎉</div>
+            <h1 class="success-title">¡Reserva confirmada!</h1>
+            <p class="success-desc">Tu turno fue registrado exitosamente. ¡Te esperamos!</p>
+            <button type="button" class="btn-nueva-reserva" (click)="resetForm()">
+                Hacer otra reserva
+            </button>
+        </div>
     </div>
 </div>
 }
