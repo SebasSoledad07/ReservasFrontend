@@ -1,11 +1,11 @@
 import { inject, Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, catchError, throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
 import type {
   CompanyPublicInfo,
-  PublicBookingDto,
-  PublicBookingResponse,
+  BookingPublicRequestDTO,
+  BookingResponseDTO,
 } from '../models/public-booking.model';
 
 @Injectable({
@@ -29,11 +29,38 @@ export class PublicBookingService {
    */
   crearReserva(
     slug: string,
-    dto: PublicBookingDto,
-  ): Observable<PublicBookingResponse> {
-    return this.http.post<PublicBookingResponse>(
+    dto: BookingPublicRequestDTO,
+  ): Observable<BookingResponseDTO> {
+    return this.http.post<BookingResponseDTO>(
       `${this.baseUrl}/${slug}/reservas`,
       dto,
+    ).pipe(
+      catchError((err: HttpErrorResponse) => throwError(() => this.mapHttpError(err))),
     );
+  }
+
+  /**
+   * English alias — POST /publico/{slug}/reservas
+   * Notifica a la empresa por WhatsApp automáticamente desde el backend.
+   */
+  createPublicBooking(
+    slug: string,
+    payload: BookingPublicRequestDTO,
+  ): Observable<BookingResponseDTO> {
+    return this.crearReserva(slug, payload);
+  }
+
+  /** Mapea errores HTTP del módulo de reservas públicas */
+  private mapHttpError(err: HttpErrorResponse): string {
+    if (err.status === 400) {
+      return err.error?.message ?? 'Datos inválidos. Revisá el formulario.';
+    }
+    if (err.status === 404) {
+      return 'El link de esta empresa no es válido.';
+    }
+    if (err.status === 409) {
+      return 'Ese horario ya está reservado. Elegí otro turno.';
+    }
+    return err.error?.message ?? 'No se pudo crear la reserva. Intentá de nuevo.';
   }
 }

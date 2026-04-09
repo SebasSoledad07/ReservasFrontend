@@ -6,15 +6,18 @@ export interface CompanyPublicInfo {
 }
 
 /** Body para POST /publico/{slug}/reservas */
-export interface PublicBookingDto {
+export interface BookingPublicRequestDTO {
   clientName: string;
-  date: string;
-  time: string;
+  date: string;        // formato ISO: YYYY-MM-DD
+  time: string;        // formato HH:mm
   serviceName: string;
 }
 
+/** @deprecated Usar BookingPublicRequestDTO */
+export type PublicBookingDto = BookingPublicRequestDTO;
+
 /** Respuesta del backend al crear la reserva pública */
-export interface PublicBookingResponse {
+export interface BookingResponseDTO {
   id: number;
   clientName: string;
   date: string;
@@ -22,3 +25,6 @@ export interface PublicBookingResponse {
   serviceName: string;
   status: string;
 }
+
+/** @deprecated Usar BookingResponseDTO */
+export type PublicBookingResponse = BookingResponseDTO;

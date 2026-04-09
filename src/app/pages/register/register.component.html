@@ -79,6 +79,27 @@
                 }
             </div>
 
+            <!-- WhatsApp de la empresa -->
+            <div class="field-group" [class.has-error]="whatsappControl.invalid && whatsappControl.touched">
+                <label for="reg-whatsapp" class="field-label">
+                    Número de WhatsApp empresarial
+                </label>
+                <div class="input-wrapper">
+                    <span class="input-icon">📱</span>
+                    <input id="reg-whatsapp" type="tel" formControlName="companyWhatsappNumber" class="field-input"
+                        placeholder="+5491112345678" autocomplete="tel" />
+                </div>
+                <span class="field-hint">
+                    Formato internacional E.164, ej: <code>+5491112345678</code>. Recibirás notificaciones de nuevas reservas aquí.
+                </span>
+                @if (whatsappControl.touched && whatsappControl.hasError('required')) {
+                <span class="field-error">El número de WhatsApp es requerido.</span>
+                }
+                @if (whatsappControl.touched && whatsappControl.hasError('pattern')) {
+                <span class="field-error">Formato inválido. Usá E.164: <code>+5491112345678</code> (sin espacios ni guiones).</span>
+                }
+            </div>
+
             <!-- Contraseña -->
             <div class="field-group" [class.has-error]="passwordControl.invalid && passwordControl.touched">
                 <label for="reg-password" class="field-label">Contraseña</label>

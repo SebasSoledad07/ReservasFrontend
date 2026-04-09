@@ -224,7 +224,8 @@
 }
 
 .success-title { font-size: 1.4rem; font-weight: 800; color: #fce7f3; margin: 0; }
-.success-desc  { font-size: 0.9rem; color: rgba(252, 231, 243, 0.5); margin: 0; line-height: 1.6; }
+.success-desc  { font-size: 0.95rem; color: #a7f3d0; font-weight: 600; margin: 0; line-height: 1.6; }
+.success-sub   { font-size: 0.85rem; color: rgba(252, 231, 243, 0.45); margin: 0; line-height: 1.6; }
 
 .btn-nueva-reserva {
     padding: 0.75rem 1.75rem;

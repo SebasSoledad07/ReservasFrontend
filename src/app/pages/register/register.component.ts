@@ -14,6 +14,9 @@ import {
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
+/** E.164 — acepta + opcional, luego 8–15 dígitos */
+const E164_REGEX = /^\+?[1-9]\d{7,14}$/;
+
 function passwordMatchValidator(
   control: AbstractControl,
 ): ValidationErrors | null {
@@ -40,7 +43,7 @@ export class RegisterComponent {
   readonly showPassword = signal(false);
   readonly showConfirmPassword = signal(false);
 
-  // Backend RegisterRequestDTO: { companyName, slug?, username, password, email }
+  // Backend RegisterRequestDTO: { companyName, slug?, username, password, email, companyWhatsappNumber }
   readonly form = this.fb.group(
     {
       companyName: ['', [Validators.required, Validators.minLength(2)]],
@@ -49,6 +52,7 @@ export class RegisterComponent {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', Validators.required],
+      companyWhatsappNumber: ['', [Validators.required, Validators.pattern(E164_REGEX)]],
     },
     { validators: passwordMatchValidator },
   );
@@ -59,6 +63,7 @@ export class RegisterComponent {
   get emailControl() { return this.form.get('email')!; }
   get passwordControl() { return this.form.get('password')!; }
   get confirmPasswordControl() { return this.form.get('confirmPassword')!; }
+  get whatsappControl() { return this.form.get('companyWhatsappNumber')!; }
 
   get passwordMismatch() {
     return (
@@ -80,26 +85,26 @@ export class RegisterComponent {
     this.errorMessage.set('');
     this.successMessage.set('');
 
-    const { companyName, slug, username, email, password } = this.form.value;
+    const { companyName, slug, username, email, password, companyWhatsappNumber } = this.form.value;
 
     this.authService
       .register({
         companyName: companyName!,
-        slug: slug?.trim() || undefined,  // opcional: el backend genera el slug si está vacío
+        slug: slug?.trim() || undefined,
         username: username!,
         email: email!,
         password: password!,
+        companyWhatsappNumber: companyWhatsappNumber!,
       })
       .subscribe({
         next: () => {
           this.isLoading.set(false);
           this.successMessage.set('¡Empresa registrada! Redirigiendo a tu panel...');
         },
-        error: (err: { error?: { message?: string } }) => {
+        error: (message: string) => {
           this.isLoading.set(false);
-          this.errorMessage.set(
-            err?.error?.message ?? 'No se pudo registrar. Intenta de nuevo.',
-          );
+          // AuthService.mapHttpError ya devuelve un string amigable
+          this.errorMessage.set(message ?? 'No se pudo registrar. Intentá de nuevo.');
         },
       });
   }

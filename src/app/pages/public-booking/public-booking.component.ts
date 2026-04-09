@@ -106,7 +106,7 @@ export class PublicBookingComponent implements OnInit {
     const { clientName, date, time, serviceName } = this.form.value;
 
     this.publicBookingService
-      .crearReserva(this.slug(), {
+      .createPublicBooking(this.slug(), {
         clientName: clientName!,
         date: date!,
         time: time!,
@@ -117,21 +117,10 @@ export class PublicBookingComponent implements OnInit {
           this.isLoading.set(false);
           this.isSubmitted.set(true);
         },
-        error: (err) => {
+        error: (message: string) => {
           this.isLoading.set(false);
-          if (err?.status === 409) {
-            this.errorMessage.set(
-              'Ese horario ya está reservado. Elegí otro turno.',
-            );
-          } else if (err?.status === 404) {
-            this.errorMessage.set(
-              'El link de esta empresa no es válido.',
-            );
-          } else {
-            this.errorMessage.set(
-              err?.error?.message ?? 'No se pudo crear la reserva. Intentá de nuevo.',
-            );
-          }
+          // PublicBookingService.mapHttpError ya devuelve string amigable
+          this.errorMessage.set(message ?? 'No se pudo crear la reserva. Intentá de nuevo.');
         },
       });
   }
