@@ -77,11 +77,6 @@ export class ReservasListComponent implements OnInit {
     });
   }
 
-  // ✅ Nueva reserva
-  crearNueva(): void {
-    console.log('Abrir formulario nueva reserva');
-  }
-
   // ✅ Eliminar definitivamente
   eliminar(reserva: Reserva): void {
     if (!confirm(`¿Eliminar reserva de ${reserva.clientName}?`)) return;
@@ -95,8 +90,4 @@ export class ReservasListComponent implements OnInit {
     });
   }
 
-  logout(): void {
-    this.reservaService.limpiarCache(); // Limpia caché antes de salir
-    this.authService.logout();
-  }
 }

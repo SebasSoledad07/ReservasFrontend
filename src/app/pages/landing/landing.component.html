@@ -1,75 +1,74 @@
-<!-- ===== NAV ===== -->
 <nav class="nav">
   <div class="nav-inner">
-    <div class="nav-brand">
-      <span class="nav-logo">🏨</span>
-      <span class="nav-name">ReservasPro</span>
-    </div>
+    <a routerLink="/" class="nav-brand">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+        <rect x="2" y="2" width="24" height="24" rx="6" fill="var(--color-accent)" />
+        <path d="M9 12h10M9 16h7M9 8h4" stroke="#fff" stroke-width="2" stroke-linecap="round" />
+      </svg>
+      <span class="nav-brand-name">Reservas</span>
+    </a>
     <div class="nav-actions">
       <a routerLink="/login" class="nav-link">Iniciar sesión</a>
-      <a routerLink="/register" class="btn-nav-cta">Empezar gratis</a>
+      <a routerLink="/register" class="btn-primary-sm">Empezar gratis</a>
     </div>
   </div>
 </nav>
 
 <!-- ===== HERO ===== -->
 <section class="hero">
-  <div class="hero-bg-orbs">
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
-  </div>
-
-  <div class="hero-content">
-    <div class="hero-badge">✨ Sistema de Reservas para Empresas</div>
-    <h1 class="hero-title">
-      Gestiona turnos.<br />
-      <span class="hero-title-accent">Sin complicaciones.</span>
-    </h1>
-    <p class="hero-desc">
-      ReservasPro te da un panel privado para tu empresa y un link público para
-      que tus clientes reserven en segundos. Sin apps, sin fricciones.
-    </p>
-    <div class="hero-ctas">
-      <a routerLink="/register" class="btn-hero-primary">
-        Crear mi empresa gratis
-        <span class="btn-arrow">→</span>
-      </a>
-      <a routerLink="/login" class="btn-hero-secondary">Ver mi panel</a>
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-badge">Sistema de turnos para empresas</div>
+      <h1 class="hero-title">
+        Turnos sin esfuerzo.
+        <span class="hero-title-accent">Clientes felices.</span>
+      </h1>
+      <p class="hero-desc">
+        Panel privado para gestionar tus reservas y un link público para que tus clientes
+        reserven en segundos. Sin apps, sin fricciones.
+      </p>
+      <div class="hero-actions">
+        <a routerLink="/register" class="btn-primary-lg">
+          Crear mi empresa gratis
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <a routerLink="/login" class="btn-secondary-lg">Ver mi panel</a>
+      </div>
     </div>
-
-    <!-- Floating card preview -->
-    <div class="hero-preview">
-      <div class="preview-card">
-        <div class="preview-header">
-          <span class="preview-dot red"></span>
-          <span class="preview-dot yellow"></span>
-          <span class="preview-dot green"></span>
-          <span class="preview-title">Panel de Reservas — AcmeCo</span>
+    <div class="hero-visual">
+      <div class="hero-card">
+        <div class="hc-header">
+          <div class="hc-dots">
+            <span class="hc-dot" style="background:#ff5f57"></span>
+            <span class="hc-dot" style="background:#ffbd2e"></span>
+            <span class="hc-dot" style="background:#28c840"></span>
+          </div>
+          <span class="hc-title">Reservas — AcmeCo</span>
         </div>
-        <div class="preview-rows">
-          <div class="preview-row">
-            <span class="preview-name">María García</span>
-            <span class="preview-service">Corte de pelo</span>
-            <span class="preview-date">Hoy 14:30</span>
-            <span class="preview-badge active">Activa</span>
+        <div class="hc-body">
+          <div class="hc-row">
+            <span class="hc-name">María García</span>
+            <span class="hc-service">Corte de pelo</span>
+            <span class="hc-time">Hoy 14:30</span>
+            <span class="hc-badge hc-badge-active">Activa</span>
           </div>
-          <div class="preview-row">
-            <span class="preview-name">Juan López</span>
-            <span class="preview-service">Manicura</span>
-            <span class="preview-date">Hoy 16:00</span>
-            <span class="preview-badge active">Activa</span>
+          <div class="hc-row">
+            <span class="hc-name">Juan López</span>
+            <span class="hc-service">Manicura</span>
+            <span class="hc-time">Hoy 16:00</span>
+            <span class="hc-badge hc-badge-active">Activa</span>
           </div>
-          <div class="preview-row muted">
-            <span class="preview-name">Ana Torres</span>
-            <span class="preview-service">Coloración</span>
-            <span class="preview-date">Ayer 10:00</span>
-            <span class="preview-badge canceled">Cancelada</span>
+          <div class="hc-row hc-muted">
+            <span class="hc-name">Ana Torres</span>
+            <span class="hc-service">Coloración</span>
+            <span class="hc-time">Ayer 10:00</span>
+            <span class="hc-badge hc-badge-canceled">Cancelada</span>
           </div>
         </div>
-        <div class="preview-link-row">
-          <span class="preview-link-label">🔗 tu-link-publico</span>
-          <span class="preview-copy">Copiar</span>
+        <div class="hc-footer">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          <span class="hc-link-label">tu-link-publico</span>
         </div>
       </div>
     </div>
@@ -77,52 +76,54 @@
 </section>
 
 <!-- ===== FEATURES ===== -->
-<section class="features">
-  <div class="section-inner">
-    <div class="section-label">Funcionalidades</div>
+<section class="features" id="features">
+  <div class="section-header">
+    <span class="section-tag">Funcionalidades</span>
     <h2 class="section-title">Todo lo que necesita tu empresa</h2>
     <p class="section-desc">Diseñado para negocios que quieren crecer sin lidiar con tecnología compleja.</p>
+  </div>
 
-    <div class="features-grid">
-      @for (f of features; track f.title) {
-        <div class="feature-card">
-          <div class="feature-icon">{{ f.icon }}</div>
-          <h3 class="feature-title">{{ f.title }}</h3>
-          <p class="feature-desc">{{ f.desc }}</p>
-        </div>
-      }
-    </div>
+  <div class="features-grid">
+    @for (f of features; track f.title) {
+      <div class="feature-card">
+        <div class="feature-icon">{{ f.icon }}</div>
+        <h3 class="feature-card-title">{{ f.title }}</h3>
+        <p class="feature-card-desc">{{ f.desc }}</p>
+      </div>
+    }
   </div>
 </section>
 
 <!-- ===== HOW IT WORKS ===== -->
-<section class="how">
-  <div class="section-inner">
-    <div class="section-label">Proceso</div>
+<section class="steps-section" id="how">
+  <div class="section-header">
+    <span class="section-tag">Proceso</span>
     <h2 class="section-title">3 pasos y ya empezás</h2>
+  </div>
 
-    <div class="steps">
-      @for (s of steps; track s.num) {
-        <div class="step">
-          <div class="step-num">{{ s.num }}</div>
-          <div class="step-connector"></div>
-          <h3 class="step-title">{{ s.title }}</h3>
-          <p class="step-desc">{{ s.desc }}</p>
-        </div>
-      }
-    </div>
+  <div class="steps-grid">
+    @for (s of steps; track s.num; let i = $index) {
+      <div class="step-card">
+        <div class="step-number">{{ s.num }}</div>
+        <h3 class="step-title">{{ s.title }}</h3>
+        <p class="step-desc">{{ s.desc }}</p>
+        @if (i < steps.length - 1) {
+          <div class="step-line" aria-hidden="true"></div>
+        }
+      </div>
+    }
   </div>
 </section>
 
-<!-- ===== CTA FINAL ===== -->
-<section class="cta-section">
+<!-- ===== CTA ===== -->
+<section class="cta">
+  <div class="cta-glow"></div>
   <div class="cta-inner">
-    <div class="cta-glow"></div>
     <h2 class="cta-title">¿Listo para ordenar tus reservas?</h2>
     <p class="cta-desc">Registrá tu empresa en menos de 1 minuto. Sin tarjeta de crédito.</p>
-    <a routerLink="/register" class="btn-hero-primary">
+    <a routerLink="/register" class="btn-primary-lg">
       Crear cuenta gratis
-      <span class="btn-arrow">→</span>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
     </a>
   </div>
 </section>
@@ -131,10 +132,13 @@
 <footer class="footer">
   <div class="footer-inner">
     <div class="footer-brand">
-      <span class="nav-logo">🏨</span>
-      <span class="nav-name">ReservasPro</span>
+      <svg width="20" height="20" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+        <rect x="2" y="2" width="24" height="24" rx="6" fill="var(--color-accent)" />
+        <path d="M9 12h10M9 16h7M9 8h4" stroke="#fff" stroke-width="2" stroke-linecap="round" />
+      </svg>
+      <span class="footer-brand-name">Reservas</span>
     </div>
-    <p class="footer-copy">© 2026 ReservasPro — Todos los derechos reservados.</p>
+    <p class="footer-copy">© 2026 Reservas — Todos los derechos reservados.</p>
     <div class="footer-links">
       <a routerLink="/login" class="footer-link">Iniciar sesión</a>
       <a routerLink="/register" class="footer-link">Registrarse</a>

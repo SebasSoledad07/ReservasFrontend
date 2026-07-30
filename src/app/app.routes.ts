@@ -28,20 +28,26 @@ export const routes: Routes = [
       ),
   },
   {
-    path: 'reservas',
+    path: '',
     canActivate: [authGuard],
     loadComponent: () =>
-      import('./pages/reservas-list/reservas-list.component').then(
-        (m) => m.ReservasListComponent,
-      ),
-  },
-  {
-    path: 'reservas/nueva',
-    canActivate: [authGuard],
-    loadComponent: () =>
-      import('./pages/reserva-form/reserva-form.component').then(
-        (m) => m.ReservaFormComponent,
-      ),
+      import('./layout/layout.component').then((m) => m.LayoutComponent),
+    children: [
+      {
+        path: 'reservas',
+        loadComponent: () =>
+          import('./pages/reservas-list/reservas-list.component').then(
+            (m) => m.ReservasListComponent,
+          ),
+      },
+      {
+        path: 'reservas/nueva',
+        loadComponent: () =>
+          import('./pages/reserva-form/reserva-form.component').then(
+            (m) => m.ReservaFormComponent,
+          ),
+      },
+    ],
   },
   {
     path: 'unauthorized',
@@ -65,6 +71,3 @@ export const routes: Routes = [
       ),
   },
 ];
-
-
-
